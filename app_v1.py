@@ -28,6 +28,7 @@ fig.add_trace(go.Scatter(
     y=data['total_sales'],
     mode='lines',
     line=dict(color='blue'),
+    name="Daily Sales",  # Legend for Sales
     yaxis="y1"  # Left y-axis
 ))
 
@@ -37,10 +38,11 @@ fig.add_trace(go.Scatter(
     y=data['total_orders'],
     mode='lines',
     line=dict(color='green'),
+    name="Daily Orders",  # Legend for Orders
     yaxis="y2"  # Right y-axis
 ))
 
-# Update layout for dual-axis without legend
+# Update layout for dual-axis with legend positioned above the chart
 fig.update_layout(
     xaxis_title="Date",
     yaxis=dict(
@@ -56,7 +58,14 @@ fig.update_layout(
         overlaying="y",
         side="right"
     ),
-    showlegend=False,
+    showlegend=True,
+    legend=dict(
+        orientation="h",
+        yanchor="bottom",
+        y=1.05,
+        xanchor="center",
+        x=0.5
+    ),
     height=600,
     width=1000
 )
@@ -76,6 +85,7 @@ fig_rolling.add_trace(go.Scatter(
     y=data['7_day_sales'],
     mode='lines',
     line=dict(color='blue'),
+    name="7-Day Sales",  # Legend for 7-day Sales
     yaxis="y1"  # Left y-axis
 ))
 
@@ -85,10 +95,11 @@ fig_rolling.add_trace(go.Scatter(
     y=data['7_day_orders'],
     mode='lines',
     line=dict(color='green'),
+    name="7-Day Orders",  # Legend for 7-day Orders
     yaxis="y2"  # Right y-axis
 ))
 
-# Update layout for dual-axis without legend
+# Update layout for dual-axis with legend positioned above the chart
 fig_rolling.update_layout(
     xaxis_title="Date",
     yaxis=dict(
@@ -104,7 +115,14 @@ fig_rolling.update_layout(
         overlaying="y",
         side="right"
     ),
-    showlegend=False,
+    showlegend=True,
+    legend=dict(
+        orientation="h",
+        yanchor="bottom",
+        y=1.05,
+        xanchor="center",
+        x=0.5
+    ),
     height=600,
     width=1000
 )
@@ -114,4 +132,3 @@ st.plotly_chart(fig_rolling, use_container_width=True)
 
 # Footer note
 st.write("Data powered by Sensa Beauty 🌸✨")
-
