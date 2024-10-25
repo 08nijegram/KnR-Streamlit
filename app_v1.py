@@ -15,8 +15,12 @@ def load_data():
     daily_sales_orders = pd.read_csv('daily_sales_orders.csv')
     return daily_sales_orders
 
-# Load the data
-data = load_data()
+# Attempt to load the data
+try:
+    data = load_data()
+except FileNotFoundError:
+    st.error("Data file not found. Please upload `daily_sales_orders.csv`.")
+    st.stop()
 
 # Convert 'date' column to datetime
 data['date'] = pd.to_datetime(data['date'])
