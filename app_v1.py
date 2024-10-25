@@ -9,12 +9,8 @@ st.title("Sensa Beauty 🌸✨")
 st.header("Metrics")
 st.write("Explore key metrics below:")
 
-# Section to upload CSV file
-uploaded_file = st.file_uploader("daily_sales_orders.csv")
-if uploaded_file is not None:
-    data = pd.read_csv(uploaded_file)
-else:
-    st.stop()  # Stop the app until a file is uploaded
+# Load the CSV directly from the repository
+data = pd.read_csv('daily_sales_orders.csv')
 
 # Convert 'date' column to datetime
 data['date'] = pd.to_datetime(data['date'])
