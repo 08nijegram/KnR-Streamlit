@@ -1,3 +1,4 @@
-streamlit==1.25.0  # Make sure to use the latest version of Streamlit if needed
-pandas==2.1.1      # For data manipulation and handling CSVs
-plotly==5.15.0     # For generating interactive charts
+streamlit==1.25.0
+pandas==2.1.1
+plotly==5.15.0
+Pillow==9.0.0  # Updated to avoid zlib dependency issues
