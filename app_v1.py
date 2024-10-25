@@ -9,18 +9,12 @@ st.title("Sensa Beauty 🌸✨")
 st.header("Metrics")
 st.write("Explore key metrics below:")
 
-# Load the data from CSV files
-@st.cache_data
-def load_data():
-    daily_sales_orders = pd.read_csv('daily_sales_orders.csv')
-    return daily_sales_orders
-
-# Attempt to load the data
-try:
-    data = load_data()
-except FileNotFoundError:
-    st.error("Data file not found. Please upload `daily_sales_orders.csv`.")
-    st.stop()
+# Section to upload CSV file
+uploaded_file = st.file_uploader("Upload daily_sales_orders.csv")
+if uploaded_file is not None:
+    data = pd.read_csv(uploaded_file)
+else:
+    st.stop()  # Stop the app until a file is uploaded
 
 # Convert 'date' column to datetime
 data['date'] = pd.to_datetime(data['date'])
@@ -36,7 +30,6 @@ fig = go.Figure()
 fig.add_trace(go.Scatter(
     x=data['date'],
     y=data['total_sales'],
-    name="Total Sales",
     mode='lines',
     line=dict(color='blue'),
     yaxis="y1"  # Left y-axis
@@ -46,7 +39,6 @@ fig.add_trace(go.Scatter(
 fig.add_trace(go.Scatter(
     x=data['date'],
     y=data['total_orders'],
-    name="Total Orders",
     mode='lines',
     line=dict(color='green'),
     yaxis="y2"  # Right y-axis
@@ -86,7 +78,6 @@ fig_rolling = go.Figure()
 fig_rolling.add_trace(go.Scatter(
     x=data['date'],
     y=data['7_day_sales'],
-    name="7-Day Cumulative Sales",
     mode='lines',
     line=dict(color='blue'),
     yaxis="y1"  # Left y-axis
@@ -96,7 +87,6 @@ fig_rolling.add_trace(go.Scatter(
 fig_rolling.add_trace(go.Scatter(
     x=data['date'],
     y=data['7_day_orders'],
-    name="7-Day Cumulative Orders",
     mode='lines',
     line=dict(color='green'),
     yaxis="y2"  # Right y-axis
